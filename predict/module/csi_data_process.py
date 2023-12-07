@@ -5,7 +5,6 @@ import collections
 import math
 import pandas as pd
 import numpy as np
-from tqdm.contrib import tzip
 
 class CsiDataProcess:
   
@@ -23,7 +22,7 @@ class CsiDataProcess:
     times = df_csi["time"].to_list()
     timelags = df_csi["timelag"].to_list()
 
-    for data, file_name, time, timelag in tzip(all_data, index, times, timelags):
+    for data, file_name, time, timelag in zip(all_data, index, times, timelags):
       self.perm_phase = collections.deque(maxlen=self.max_data_size)
       self.perm_amp = collections.deque(maxlen=self.max_data_size)
       

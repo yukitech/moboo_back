@@ -5,9 +5,8 @@ from datetime import datetime
 MAX_ROW_NUM = 280
     
 
-def read_file(upload_file):
+def read_file(upload_file, file_name):
   csi = pd.DataFrame(columns=["data", "time", "timelag"])
-  file_name = upload_file.name
   data = read_csv(upload_file)
   time = read_time(upload_file)
   time_lag = read_time_lag(upload_file)
