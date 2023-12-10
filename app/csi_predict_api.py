@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, Depends
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
+import uvicorn
 import shutil
 import tempfile
 
@@ -45,3 +46,6 @@ def get_prob_result(id, db: Session = Depends(get_db)):
 @app.get('/all')
 def get_all(db: Session = Depends(get_db)):
     return crud.get_all(db=db)
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
