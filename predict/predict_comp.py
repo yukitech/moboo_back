@@ -34,22 +34,17 @@ def predict(csi_data_file, file_name):
 
   model = keras.models.load_model(MODEL)
 
-  all_prob = model.predict(predict_data, batch_size=1)
+  probs = model.predict(predict_data, batch_size=1)
 
-  ans = []
-  for probs in all_prob:
-    labels = {"sitdown":0, "standup":1, "fall":2, "walk":3}
-    for prob, dict_key in zip(probs, labels.keys()):
-      labels[dict_key] = prob
-    ans.append(labels)
+  ans = {"sitdown":0, "standup":0, "fall":0, "walk":0}
+  for prob, dict_key in zip(probs[0], ans.keys()):
+    ans[dict_key] = str(prob)
   
-  sorted_ans = []
-  for dic in ans:
-    sort_dict = sorted(dic.items(), key=lambda x:x[1], reverse=True)
-    sorted_ans.append(sort_dict)
-  
-  for ans in sorted_ans:
-    print('========================')
-    for e in ans:
-      print(str(e))
-    print('========================')
+  sorted_ans = sorted(ans.items(), key=lambda x:x[1], reverse=True)
+
+  sorted_ans = dict(sorted_ans)
+
+  pred_result = next(iter(sorted_ans))
+  prob_result = str(sorted_ans)
+
+  return pred_result, prob_result
