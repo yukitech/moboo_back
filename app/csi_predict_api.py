@@ -21,4 +21,4 @@ def get_uploadfile(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, temp_file)
         predict(temp_file.name, file.filename)
 
-    return JSONResponse(content=None)
+    return JSONResponse(content={"res": "ok", "filename": file.filename})
