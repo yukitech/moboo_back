@@ -3,14 +3,12 @@
 
 from tensorflow import keras
 import numpy as np
-import sys
 
-sys.path.append('./predict')
-from module.read_csv import read_file
-from module.csi_data_process import CsiDataProcess
+from .module.read_csv import read_file
+from .module.csi_data_process import CsiDataProcess
 
 # constant definition
-MODEL = 'predict/model/LSTM_model.hdf5'
+MODEL = 'app/predict/model/LSTM_model.hdf5'
 MAX_TIMESTEP = 280
 CLASS_NUM = 4
 
@@ -31,7 +29,6 @@ def pre_process(original_data, division_num):
 def predict(csi_data_file, file_name):
   predict_original_data = read_file(csi_data_file, file_name)
   predict_data = pre_process(predict_original_data, 1)
-
   model = keras.models.load_model(MODEL)
 
   probs = model.predict(predict_data, batch_size=1)

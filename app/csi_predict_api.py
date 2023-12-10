@@ -3,11 +3,8 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 import shutil
 import tempfile
-import sys
 
-sys.path.append('..')
-from predict.predict_comp import predict
-
+from .predict.predict_comp import predict
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 
