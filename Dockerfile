@@ -1,4 +1,4 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim
+FROM python:3.9.18-alpine
 
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
@@ -7,7 +7,11 @@ WORKDIR /app
 
 COPY ./requirements.txt requirements.txt
 
-RUN apt-get update && apt-get install postgresql && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache postgresql-libs \
+ && apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev \
+ && pip install --upgrade pip \
+ && pip install -r requirements.txt --no-cache-dir \
+ && apk --purge del .build-deps
 
 COPY ./app ./app
 
