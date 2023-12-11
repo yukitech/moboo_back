@@ -5,9 +5,9 @@ import uvicorn
 import shutil
 import tempfile
 
-from .predict.predict_comp import predict
-from . import crud, models, schemas
-from .database import SessionLocal, engine
+from predict.predict_comp import predict
+import crud, models, schemas
+from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
+import models, schemas
 from sqlalchemy import desc
 
 def get_all(db: Session):

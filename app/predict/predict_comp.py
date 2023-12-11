@@ -8,7 +8,7 @@ from .module.read_csv import read_file
 from .module.csi_data_process import CsiDataProcess
 
 # constant definition
-MODEL = 'app/predict/model/LSTM_model.hdf5'
+MODEL = 'predict/model/LSTM_model.hdf5'
 MAX_TIMESTEP = 280
 CLASS_NUM = 4
 
